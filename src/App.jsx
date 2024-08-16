@@ -13,6 +13,7 @@ import UserContextProvider from './Context/UserContext'
 import CounterContextProvider from './Context/CounterContext'
 import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute'
 import Products from './Components/Products/Products'
+import ProductDetails from './Components/ProductDetails/ProductDetails'
 
 const routing = createBrowserRouter([
   {
@@ -45,6 +46,15 @@ const routing = createBrowserRouter([
           <ProtectedRoute>
             {" "}
             <Categories/>
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/productDetails/:id",
+        element: (
+          <ProtectedRoute>
+            {" "}
+            <ProductDetails/>
           </ProtectedRoute>
         ),
       },
