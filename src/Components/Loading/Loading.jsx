@@ -2,12 +2,6 @@ import { useEffect } from "react";
 import { useState } from "react";
 
 export default function Loading() {
-  const [counter, setCounter] = useState(0);
-
-  useEffect(() => {
-    console.log("Loading Mounting");
-  }, []);
-
   return (
     <div className="loading-overlay flex items-center justify-center fixed inset-0 bg-gray-800 bg-opacity-50 z-50">
       <div className="preloader flex flex-col items-center">

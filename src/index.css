@@ -80,9 +80,17 @@
       stroke: rgba(23, 28, 26, 0.1);
       transition: stroke .3s;
     }
-  
-  
-    /* Animations */
+
+    .slick-dots li {
+      width: 400px; /* Adjust width */
+      height: 20px; /* Adjust height */
+    }
+    
+    .slick-dots li button {
+      width: 200px; /* Match the width of li */
+      height: 20px; /* Match the height of li */
+      background-color: #000; /* Dot color */
+    }
     @keyframes cartLines {
       from,
       to {

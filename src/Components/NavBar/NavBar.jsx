@@ -1,14 +1,20 @@
 import { useContext, useRef, useState } from "react";
 import { useEffect } from "react";
-import { FaFacebook, FaTiktok, FaTwitter, FaYoutube } from "react-icons/fa";
+import { FaCartPlus, FaFacebook, FaTiktok, FaTwitter, FaYoutube } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.svg"
 import { CounterContext } from "../../Context/CounterContext";
 import { UserContext } from "../../Context/UserContext";
+import { FaHeartCirclePlus } from "react-icons/fa6";
+import { CartContext } from "../../Context/CartContext";
+import { WhatchListContext } from "../../Context/WhatchListContext";
+
 
 export default function Navbar() {
   const { counter } = useContext(CounterContext);
   const { token, setToken } = useContext(UserContext);
+  const {cartItems}=useContext(CartContext);
+  const{WhatchListItems ,count}=useContext(WhatchListContext);
   const navigate = useNavigate();
 
   function logOut() {
@@ -16,22 +22,19 @@ export default function Navbar() {
     navigate("/login");
   }
 
-  useEffect(() => {
-    console.log("Mounting Navbar");
-  }, []);
   return (
-    <nav className="bg-white border-gray-200 dark:bg-gray-900">
-      <div className="max-w-screen-xl flex gap-5 flex-wrap items-center mx-auto p-4 md:justify-between">
-        <div>
-        <a className="flex text-3xl items-center space-x-3 rtl:space-x-reverse">
+    <nav className="bg-[#F8F9FA] border-gray-200 dark:bg-gray-900">
+      <div className="max-w-screen-xl flex flex-wrap items-center mx-auto p-4 mt-0 md:justify-between">
+        <div className="">
+        <Link to="" className="flex text-3xl items-center space-x-3 rtl:space-x-reverse">
           <img src={logo} alt="" className="cursor-pointer" />
         
-        </a>
+        </Link>
         </div>
         <button
           data-collapse-toggle="navbar-default"
           type="button"
-          className="inline-flex ms-auto items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-xl xl:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+          className="inline-flex ms-auto items-center p-2 w-10 h-10 justify-between text-sm text-gray-500 rounded-xl lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
           aria-controls="navbar-default"
           aria-expanded="false"
         >
@@ -52,13 +55,12 @@ export default function Navbar() {
             />
           </svg>
         </button>
-
         <div
-          className="hidden w-full grow  xl:flex justify-between xl:w-auto "
+          className="hidden w-full grow  lg:flex  items-center lg:w-auto bg-[#F8F9FA] "
           id="navbar-default"
         >
-          <div>
-          <ul className="font-medium flex items-center flex-col p-4 xl:p-0 mt-4 border border-gray-100 rounded-xl bg-gray-50 xl:flex-row xl:space-x-8 rtl:space-x-reverse xl:mt-0 xl:border-0 xl:bg-white dark:bg-gray-800 xl:dark:bg-gray-900 dark:border-gray-700">
+          <div className="mx-auto">
+          <ul className="font-medium flex items-center flex-col lg:flex-row lg:p-4 xl:p-0   rounded-xl xl:space-x-8 rtl:space-x-reverse xl:mt-0 xl:border-0  dark:bg-gray-800 xl:dark:bg-gray-900 dark:border-gray-700">
             {token &&  (
               <>
                 <li>
@@ -71,7 +73,23 @@ export default function Navbar() {
                 </li>
                 <li>
                   <Link
-                    to="Products"
+                    to="cart"
+                    className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 xl:hover:bg-transparent xl:border-0 xl:hover:text-green-700 xl:p-0 dark:text-white xl:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white xl:dark:hover:bg-transparent"
+                  >
+                    Cart
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="whatchlist"
+                    className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 xl:hover:bg-transparent xl:border-0 xl:hover:text-green-700 xl:p-0 dark:text-white xl:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white xl:dark:hover:bg-transparent"
+                  >
+                    WhishList
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="products"
                     className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 xl:hover:bg-transparent xl:border-0 xl:hover:text-green-700 xl:p-0 dark:text-white xl:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white xl:dark:hover:bg-transparent"
                   >
                     Products
@@ -79,7 +97,7 @@ export default function Navbar() {
                 </li>
                 <li>
                   <Link
-                    to="categories"
+                    to="category"
                     className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 xl:hover:bg-transparent xl:border-0 xl:hover:text-green-700 xl:p-0 dark:text-white xl:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white xl:dark:hover:bg-transparent"
                   >
                     Categories
@@ -93,21 +111,13 @@ export default function Navbar() {
                     Brands
                   </Link>
                 </li>
-                <li>
-                  <Link
-                    to="cart"
-                    className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 xl:hover:bg-transparent xl:border-0 xl:hover:text-green-700 xl:p-0 dark:text-white xl:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white xl:dark:hover:bg-transparent"
-                  >
-                    Cart
-                  </Link>
-                </li>
               </>
             )}
           </ul>
           </div>
 
-          <div>
-          <ul className="font-medium flex items-center flex-col p-4 xl:p-0 mt-4 border border-gray-100 rounded-xl bg-gray-50 xl:flex-row xl:space-x-8 rtl:space-x-reverse xl:mt-0 xl:border-0 xl:bg-white dark:bg-gray-800 xl:dark:bg-gray-900 dark:border-gray-700">
+          <div className="ml-auto">
+          <ul className="font-medium flex justify-self-end items-center flex-col p-4 xl:p-0  rounded-xl  xl:flex-row xl:space-x-8 rtl:space-x-reverse xl:mt-0  dark:bg-gray-800 xl:dark:bg-gray-900 dark:border-gray-700">
             {!token &&(
               <>
                 <li>
@@ -130,52 +140,27 @@ export default function Navbar() {
             )}
 
             {token && (
+              <div className="flex items-center justify-center gap-x-4">
               <li onClick={logOut}>
                 <span className="block cursor-pointer py-2 px-3 text-gray-900 rounded hover:bg-gray-100 xl:hover:bg-transparent xl:border-0 xl:hover:text-green-700 xl:p-0 dark:text-white xl:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white xl:dark:hover:bg-transparent">
                   SignOut
                 </span>
               </li>
-            )}
-
-
-            <li>
+              <li>
               <ToggleMode />
             </li>
-
-            {/* 
+            <li className="pe-4 relative">
+                <Link to="whatchlist"><FaHeartCirclePlus className="text-gray-500 text-2xl "/></Link>
+                <span>{count==0?null:<div className="absolute flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-green-500 border-2 border-white rounded-full -top-4 end-1 dark:border-gray-900">{count}</div>}</span>
+              </li>
+              <li className="relative">
+                <Link to="cart"><FaCartPlus className="text-gray-500 text-2xl "/></Link>
+                <span>{cartItems==0?null:<div className="absolute flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-green-500 border-2 border-white rounded-full -top-4 -end-4 dark:border-gray-900">{cartItems}</div>}</span>
+              </li>
+            </div>
+            )}
             
-            FaFacebook
-            FaTwitter 
-            FaLinkedinIn
-            FaTiktok
-            FaYoutube
-            */}
-            <li className="flex gap-4">
-              <a
-                to="#"
-                className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 xl:hover:bg-transparent xl:border-0 xl:hover:text-green-700 xl:p-0 dark:text-white xl:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white xl:dark:hover:bg-transparent"
-              >
-                <FaFacebook />
-              </a>
-              <a
-                to="#"
-                className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 xl:hover:bg-transparent xl:border-0 xl:hover:text-green-700 xl:p-0 dark:text-white xl:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white xl:dark:hover:bg-transparent"
-              >
-                <FaTwitter />
-              </a>
-              <a
-                to="#"
-                className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 xl:hover:bg-transparent xl:border-0 xl:hover:text-green-700 xl:p-0 dark:text-white xl:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white xl:dark:hover:bg-transparent"
-              >
-                <FaYoutube />
-              </a>
-              <a
-                to="#"
-                className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 xl:hover:bg-transparent xl:border-0 xl:hover:text-green-700 xl:p-0 dark:text-white xl:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white xl:dark:hover:bg-transparent"
-              >
-                <FaTiktok />
-              </a>
-            </li>
+           
           </ul>
           </div>
         </div>

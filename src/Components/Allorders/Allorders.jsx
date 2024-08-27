@@ -1,19 +1,19 @@
 import { useState } from 'react'
-import Style from './Footer.module.css'
+import Style from './Allorders.module.css'
 import { useEffect } from 'react'
 
-export default  function Footer() {
+function Allorders() {
     
     const [counter, setCounter] = useState(0)
     useEffect(()=> {
-        console.log('Mounting Footer');
+        console.log('Mounting Allorders');
     } , [])
     return (
         <div>
-            <h2>Footer</h2>
+            <h2>Allorders</h2>
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dicta veniam consequatur explicabo sunt excepturi fugit eaque labore nostrum rem voluptatum saepe necessitatibus maiores harum quas expedita perferendis, soluta voluptate temporibus!</p>
         </div>
     )
 }
 
-
+export default Allorders
